@@ -242,7 +242,7 @@ local items = {
 		["Keypad"] = {
 			item = "basic_machines:keypad",
 			description = S("Activate machines by sending signal"),
-			craft = {"default:wood", "default:stick"}
+			craft = {"default:stick 20"}
 		},
 
 		["Light"] = {
