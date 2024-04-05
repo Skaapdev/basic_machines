@@ -33,10 +33,10 @@ basic_machines = {
 		-- technic_power
 		generator_upgrade		= 0,		-- upgrade available in addition to the current limit (50)
 		-- space
-		space_start_eff			= 1500,		-- space efficiency height
-		space_start				= 1100,		-- space height, set to false to disable
+		space_start_eff			= 7000,		-- space efficiency height
+		space_start				= 1966,		-- space height, set to false to disable
 		space_textures			= "",		-- skybox space textures replacement with up to 6 texture names separated by commas
-		exclusion_height		= 6666,		-- above, without "include" priv, player is teleported to a random location
+		exclusion_height		= 29999,	-- above, without "include" priv, player is teleported to a random location
 		space_effects			= false,	-- enable damage mechanism
 		--
 		register_crafts			= false		-- machines crafts recipes
