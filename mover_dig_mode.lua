@@ -198,6 +198,7 @@ local function dig(pos, meta, owner, prefer, pos1, node1, node1_name, source_che
 			end
 
 			if seed_planting then
+				sound_name = 'default_place_node' -- Sound for seed planting.
 				if third_upgradetype then
 					local length_pos2 = #pos2
 
