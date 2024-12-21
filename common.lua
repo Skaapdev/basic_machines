@@ -19,7 +19,7 @@ basic_machines = {
 		-- ball spawner
 		max_balls				= 2,		-- balls count limit per player, minimum 0
 		-- crystals
-		energy_multiplier		= 1,		-- energy crystals multiplier
+		energy_multiplier		= 4,		-- energy crystals multiplier
 		power_stackmax			= 25,		-- power crystals stack max
 		-- grinder
 		grinder_register_dusts	= true,		-- dusts/extractors for lumps/ingots, needed for the other grinder settings
