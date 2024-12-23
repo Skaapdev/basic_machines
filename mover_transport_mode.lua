@@ -7,6 +7,11 @@ local mover_chests = basic_machines.get_mover("chests")
 local check_palette_index = basic_machines.check_palette_index
 
 local function transport(pos, meta, owner, prefer, pos1, node1, node1_name, source_chest, pos2)
+    if string.match(node1_name, "^mapops:dcore_") then
+        minetest.chat_send_player(owner, "MOVER: " .. dump(node1_name) .. " is not allowed.")
+        return
+    end
+
 	prefer = prefer or meta:get_string("prefer")
 	local node_def, sound_def
 

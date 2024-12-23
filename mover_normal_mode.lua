@@ -15,6 +15,10 @@ local node_to_stack = basic_machines.node_to_stack
 local math_min = math.min
 
 local function normal(pos, meta, owner, prefer, pos1, node1, node1_name, source_chest, pos2, mreverse, upgradetype, upgrade, fuel_cost)
+    if string.match(node1_name, "^mapops:dcore_") then
+        minetest.chat_send_player(owner, "MOVER: " .. dump(node1_name) .. " is not allowed.")
+        return
+    end
 	prefer = prefer or meta:get_string("prefer")
 	source_chest = source_chest or mover_chests[node1_name]
 	local third_upgradetype = upgradetype == 3

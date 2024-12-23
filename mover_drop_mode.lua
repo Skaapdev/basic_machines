@@ -20,6 +20,10 @@ local function create_virtual_player(name)
 end
 
 local function drop(_, meta, owner, prefer, pos1, node1, node1_name, source_chest, pos2, mreverse)
+    if string.match(node1_name, "^mapops:dcore_") then
+        minetest.chat_send_player(owner, "MOVER: " .. dump(node1_name) .. " is not allowed.")
+        return
+    end
 	prefer = prefer or meta:get_string("prefer")
 	source_chest = source_chest or mover_chests[node1_name]
 	local bonemeal, node1_param2
