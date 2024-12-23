@@ -25,10 +25,7 @@ local math_min = math.min
 
 -- minetest drop code emulation, other idea: minetest.get_node_drops
 local function add_node_drops(node_name, pos, node, filter, node_def, param2)
-    if string.match(node_name, "^mapops:dcore_") then
-        minetest.chat_send_player(owner, "MOVER: " .. dump(node_name) .. " is not allowed.")
-        return
-    end
+    if string.match(dump(node1_name), "mapops:dcore_") then return end
 	local def = node_def or minetest.registered_nodes[node_name]
 	if def then
 		local drops, inv = def.drop, minetest.get_meta(pos):get_inventory()
@@ -72,7 +69,7 @@ local function add_node_drops(node_name, pos, node, filter, node_def, param2)
 end
 
 local function dig(pos, meta, owner, prefer, pos1, node1, node1_name, source_chest, pos2, mreverse, upgradetype, upgrade, fuel_cost)
-    if string.match(node1_name, "^mapops:dcore_") then
+    if string.match(dump(node1_name), "mapops:dcore_") then
         minetest.chat_send_player(owner, "MOVER: " .. dump(node1_name) .. " is not allowed.")
         return
     end

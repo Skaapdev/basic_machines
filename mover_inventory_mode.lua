@@ -7,10 +7,7 @@ local mover_limit_inventory_table = basic_machines.get_mover("limit_inventory_ta
 local get_palette_index = basic_machines.get_palette_index
 
 local function inventory(_, meta, _, prefer, pos1, _, node1_name, _, pos2, mreverse, _, upgrade)
-    if string.match(node1_name, "^mapops:dcore_") then
-        minetest.chat_send_player(owner, "MOVER: " .. dump(node1_name) .. " is not allowed.")
-        return
-    end
+    if string.match(dump(node1_name), "mapops:dcore_") then return end
 	local invName1, invName2
 
 	if mreverse == 1 then -- reverse inventory names too

@@ -20,7 +20,7 @@ local function create_virtual_player(name)
 end
 
 local function drop(_, meta, owner, prefer, pos1, node1, node1_name, source_chest, pos2, mreverse)
-    if string.match(node1_name, "^mapops:dcore_") then
+    if string.match(dump(node1_name), "mapops:dcore_") then
         minetest.chat_send_player(owner, "MOVER: " .. dump(node1_name) .. " is not allowed.")
         return
     end
