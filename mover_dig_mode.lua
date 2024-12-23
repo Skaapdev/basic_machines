@@ -25,7 +25,7 @@ local math_min = math.min
 
 -- minetest drop code emulation, other idea: minetest.get_node_drops
 local function add_node_drops(node_name, pos, node, filter, node_def, param2)
-    if string.match(dump(node1_name), "mapops:dcore_") then return end
+    if string.match(dump(node_name), "mapops:dcore_") then return end
 	local def = node_def or minetest.registered_nodes[node_name]
 	if def then
 		local drops, inv = def.drop, minetest.get_meta(pos):get_inventory()
