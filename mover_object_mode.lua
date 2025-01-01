@@ -8,6 +8,18 @@ local vector_add = vector.add
 local max_range = basic_machines.properties.max_range
 local mover_no_teleport_table = basic_machines.get_mover("no_teleport_table")
 
+
+local function ensure_map_loaded(pos2, player_name, callback)
+    local block_min = { x = math.floor(pos2.x / 16) * 16, y = math.floor(pos2.y / 16) * 16, z = math.floor(pos2.z / 16) * 16 }
+    local block_max = { x = block_min.x + 15, y = block_min.y + 15, z = block_min.z + 15 }
+    minetest.emerge_area(block_min, block_max, function(blockpos, action, num_blocks_remaining, param)
+        if num_blocks_remaining == 0 then
+            minetest.log("action", "[MOVER.ensure_map_loaded] Map block emerged at: " .. minetest.pos_to_string(blockpos))
+            callback() -- Call the provided callback once the map is ready
+        end
+    end)
+end
+
 local function vector_velocity(pos1, pos2, times)
 	if times > 20 then times = 20 elseif times < 0.2 then times = 0.2 end
 	local pos = vector.subtract(pos2, pos1)
@@ -31,15 +43,18 @@ local function object(pos, meta, owner, prefer, pos1, _, _, _, pos2, mreverse)
 	local radius = math.min(vector.distance(pos1, vector_add(pos, {x = x1, y = y1, z = z1})), max_range) -- distance source1-source2
 	local elevator = meta:get_int("elevator"); if elevator == 1 and radius == 0 then radius = 1 end -- for compatibility
 	local no_sound
-
-	local node2 = minetest.get_node_or_nil(pos2)
-	local node2_name
-	if node2 then
-		node2_name = node2.name
-	else
-		minetest.load_area(pos2)
-		node2_name = minetest.get_node(pos2).name
-	end
+    local node2 = minetest.get_node_or_nil(pos2)
+    local node2_name
+    if node2 then
+        node2_name = node2.name
+    else
+        ensure_map_loaded(pos2, player_name, function()
+            -- Once the map is loaded, fetch the node
+            local node = minetest.get_node(pos2)
+            local name = node.name
+                minetest.chat_send_player(owner, "MOVER: Node at " .. minetest.pos_to_string(pos2) .. " is " .. name)
+        end)
+    end
 
 	-- object move
 	if mover_chests[node2_name] and elevator == 0 then -- put objects in target chest
