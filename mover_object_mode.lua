@@ -52,7 +52,8 @@ local function object(pos, meta, owner, prefer, pos1, _, _, _, pos2, mreverse)
             -- Once the map is loaded, fetch the node
             local node = minetest.get_node(pos2)
             local name = node.name
-                minetest.chat_send_player(owner, "MOVER: Node at " .. minetest.pos_to_string(pos2) .. " is " .. name)
+            minetest.chat_send_player(owner, "MOVER: Node at " .. minetest.pos_to_string(pos2) .. " is " .. name)
+            minetest.load_area(pos2)
         end)
     end
 
@@ -102,7 +103,9 @@ local function object(pos, meta, owner, prefer, pos1, _, _, _, pos2, mreverse)
 				if not minetest.is_protected(obj:get_pos(), owner) and
 					(prefer == "" or prefer == obj:get_player_name())
 				then -- move player only from owners land
-					obj:set_pos(pos2)
+					--obj:set_pos(pos2)
+					local offset = vector.subtract(pos2, obj:get_pos())
+					obj:add_pos(offset)
 				end
 			else
 				local lua_entity = obj:get_luaentity()
