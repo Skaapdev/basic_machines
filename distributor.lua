@@ -90,7 +90,12 @@ minetest.register_node("basic_machines:distributor", {
 	end,
 
 	can_dig = function(pos, player)
-		return player and minetest.get_meta(pos):get_string("owner") == player:get_player_name() or false
+		local meta = minetest.get_meta(pos)
+		if player and meta and meta:get_string("owner") == "" then
+		    return true -- No owner allows node to be dug.
+		else
+		    return player and meta:get_string("owner") == player:get_player_name() or false
+		end
 	end,
 
 	on_rightclick = function(pos, _, player)

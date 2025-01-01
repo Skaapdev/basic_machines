@@ -113,7 +113,11 @@ local function add_constructor(name, items, description, recipe)
 		can_dig = function(pos, player) -- main inv must be empty to be dug
 			if player then
 				local meta = minetest.get_meta(pos)
-				return meta:get_inventory():is_empty("main") and meta:get_string("owner") == player:get_player_name()
+				if meta and meta:get_string("owner") == "" then
+				    return true -- No owner allows node to be dug.
+				else
+				    return meta:get_inventory():is_empty("main") and meta:get_string("owner") == player:get_player_name()
+				end
 			else
 				return false
 			end
