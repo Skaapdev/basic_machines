@@ -423,9 +423,14 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 				then
 					-- are new numbers inside bounds ?
 					if not minetest.check_player_privs(name, "privs") and
+						(abs(x0) > 3000 or abs(y0) > 3000 or abs(z0) > 3000 or
+						abs(x1) > 3000 or abs(y1) > 3000 or abs(z1) > 3000 or
+						abs(x2) > 3000 or abs(y2) > 3000 or abs(z2) > 3000)
+					    --[[
 						(abs(x0) > max_range or abs(y0) > max_range or abs(z0) > max_range or
 						abs(x1) > max_range or abs(y1) > max_range or abs(z1) > max_range or
 						abs(x2) > max_range or abs(y2) > max_range or abs(z2) > max_range)
+						--]]
 					then
 						minetest.chat_send_player(name, S("MOVER: All coordinates must be between @1 and @2. For increased range set up positions by punching.",
 							-max_range, max_range)); return
