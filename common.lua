@@ -4,7 +4,7 @@
 
 basic_machines = {
 	F = minetest.formspec_escape,
-	S = S,
+	S = minetest.get_translator("basic_machines"),
 	version = "01/03/2025 (fork)",
 	properties = {
 		no_clock			= false,	-- if true all continuously running activities (clockgen/keypad) are disabled
