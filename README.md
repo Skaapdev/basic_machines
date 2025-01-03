@@ -21,7 +21,7 @@ At least [Minetest](https://www.minetest.net) version 5.4.0 is needed
 ---
 (c) 2015-2016 rnd\
 textures by rnd, new textures by SaKeL (2016) and Jozet (2017)\
-Copyright (C) 2022-2023 мтест
+Copyright (C) 2022-2025 мтест
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
