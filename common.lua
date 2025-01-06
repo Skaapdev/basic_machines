@@ -12,7 +12,7 @@ basic_machines = {
 		machines_minstep	= 1,		-- minimal allowed activation timestep, if faster machines overheat
 		machines_operations	= 10,		-- 1 coal will provide 10 mover basic operations (moving dirt 1 block distance)
 		machines_timer		= 5,		-- main timestep
-		max_range			= 10,		-- machines normal range of operation
+		max_range			= 40,		-- machines normal range of operation
 		mover_upgrade_max	= 10		-- upgrade mover to increase range and to reduce fuel consumption
 	},
 	settings = {							-- can be added to server configuration file, example: basic_machines_energy_multiplier = 1
