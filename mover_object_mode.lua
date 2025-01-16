@@ -9,7 +9,7 @@ local max_range = basic_machines.properties.max_range
 local mover_no_teleport_table = basic_machines.get_mover("no_teleport_table")
 
 
-local function ensure_map_loaded(pos2, player_name, callback)
+local function ensure_map_loaded(pos2, callback)
     local block_min = { x = math.floor(pos2.x / 16) * 16, y = math.floor(pos2.y / 16) * 16, z = math.floor(pos2.z / 16) * 16 }
     local block_max = { x = block_min.x + 15, y = block_min.y + 15, z = block_min.z + 15 }
     minetest.emerge_area(block_min, block_max, function(blockpos, action, num_blocks_remaining, param)
@@ -48,7 +48,7 @@ local function object(pos, meta, owner, prefer, pos1, _, _, _, pos2, mreverse)
     if node2 then
         node2_name = node2.name
     else
-        ensure_map_loaded(pos2, player_name, function()
+        ensure_map_loaded(pos2, function()
             -- Once the map is loaded, fetch the node
             local node = minetest.get_node(pos2)
             local name = node.name
