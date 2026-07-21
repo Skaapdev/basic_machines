@@ -5,13 +5,13 @@
 local S = basic_machines.S
 local exclusion_height = basic_machines.settings.exclusion_height
 local space_effects = basic_machines.settings.space_effects
-local space_start = basic_machines.settings.space_start
+--local space_start = basic_machines.settings.space_start -- skaapdev need to be able to adjust this after load.
 local space_start_eff = basic_machines.settings.space_start_eff
 local use_player_monoids = minetest.global_exists("player_monoids")
 local use_basic_protect = minetest.global_exists("basic_protect")
 
 minetest.register_on_punchplayer(function(player, hitter, time_from_last_punch, tool_capabilities)
-	if player:get_pos().y > space_start and hitter and hitter:is_player() then
+	if player:get_pos().y > basic_machines.settings.space_start and hitter and hitter:is_player() then
 		if time_from_last_punch > 0.8 and vector.length(player:get_velocity()) > 0.2 then
 			local dir = vector.subtract(player:get_pos(), hitter:get_pos())
 			local unit_vector = vector.divide(dir, vector.length(dir))
@@ -101,13 +101,12 @@ end
 
 minetest.register_globalstep(function(dtime)
 	stimer = stimer + dtime; if stimer < 5 then return end; stimer = 0
-
 	for _, player in ipairs(minetest.get_connected_players()) do
 		local pos = player:get_pos()
 		local name = player:get_player_name()
 		local inspace
 
-		if pos.y > space_start then
+		if pos.y > basic_machines.settings.space_start then
 			inspace = 1
 			if pos.y > exclusion_height and not minetest.check_player_privs(name, "include") then
 				local spawn_pos = {

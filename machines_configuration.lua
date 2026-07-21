@@ -772,7 +772,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 						pass = mpass
 						minetest.chat_send_player(name, S("KEYPAD: Password too long."))
 					else
-						pass = minetest.get_password_hash(pos.x, pass .. pos.y); pass = minetest.get_password_hash(pos.y, pass .. pos.z)
+						pass = minetest.get_password_hash("", pass); pass = minetest.get_password_hash("",pass)
 						meta:set_string("pass", pass)
 					end
 				end
@@ -877,7 +877,7 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 				meta:set_string("input", pass)
 				basic_machines.use_keypad(pos, machines_TTL)
 			else
-				pass = minetest.get_password_hash(pos.x, pass .. pos.y); pass = minetest.get_password_hash(pos.y, pass .. pos.z)
+				pass = minetest.get_password_hash("", pass); pass = minetest.get_password_hash("", pass)
 				if pass == meta:get_string("pass") then
 					minetest.chat_send_player(name, S("ACCESS GRANTED"))
 
