@@ -88,8 +88,9 @@ local mover = {
 
 		-- grief potential items need highest possible upgrades
 		["boneworld:acid_source_active"] = 5950,
-		["darkage:mud"] = 5950,
-		["default:lava_source"] = 5950, ["default:river_water_source"] = 5950, ["default:water_source"] = 5950,
+		--["darkage:mud"] = 5950,
+		--["default:lava_source"] = 5950, ["default:river_water_source"] = 5950, ["default:water_source"] = 5950,
+		["default:lava_source"] = 20, ["default:river_water_source"] = 20, ["default:water_source"] = 20,
 		["es:toxic_water_source"] = 5950, ["es:toxic_water_flowing"] = 5950,
 		["integral:sap"] = 5950, ["integral:weightless_water"] = 5950,
 		["underworlds:water_death_source"] = 5950, ["underworlds:water_poison_source"] = 5950,
