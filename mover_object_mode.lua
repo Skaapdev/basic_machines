@@ -104,8 +104,18 @@ local function object(pos, meta, owner, prefer, pos1, _, _, _, pos2, mreverse)
 					(prefer == "" or prefer == obj:get_player_name())
 				then -- move player only from owners land
 					--obj:set_pos(pos2)
+					--[[
 					local offset = vector.subtract(pos2, obj:get_pos())
-					obj:add_pos(offset)
+					obj:add_pos(offset) --]]
+					local player_obj = obj
+                    ensure_map_loaded(pos2, function()
+                        minetest.after(2, function()
+                            if player_obj and player_obj:is_player() then
+                                minetest.log("action", "[MOVER] Teleporting " .. player_obj:get_player_name() .. " to " .. minetest.pos_to_string(pos2))
+                                player_obj:set_pos(pos2)
+                            end
+                        end)
+                    end)
 				end
 			else
 				local lua_entity = obj:get_luaentity()
