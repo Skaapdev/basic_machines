@@ -14,7 +14,7 @@ minetest.register_on_punchplayer(function(player, hitter, time_from_last_punch, 
 	if player:get_pos().y > basic_machines.settings.space_start and hitter and hitter:is_player() then
 		if time_from_last_punch > 0.8 and vector.length(player:get_velocity()) > 0.2 then
 			local dir = vector.subtract(player:get_pos(), hitter:get_pos())
-			local unit_vector = vector.divide(dir, vector.length(dir))
+			local unit_vector = vector.divide(dir, math.max(vector.length(dir), 0.001)) -- skaapdev don't divide by zero.
 			local punch_vector = {x = 5, y = 0.9, z = 5}
 			player:add_velocity(vector.multiply(unit_vector, punch_vector)) -- push player a little
 		end
